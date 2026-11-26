@@ -1,0 +1,19 @@
+{
+    "formatVersion": 1,
+    "libraries": [
+        {
+            "downloads": {
+                "artifact": {
+                    "sha1": "7c45abfcaf80762e8a3aee75d3e7ed1465dce4d9",
+                    "size": 150355,
+                    "url": "https://repo.llaun.ch/libraries/by/ely/authlib/9.0.75-ely.3/authlib-9.0.75-ely.3.jar"
+                }
+            },
+            "name": "by.ely:authlib:9.0.75-ely.3"
+        }
+    ],
+    "name": "Ely.by Authlib",
+    "releaseTime": "2026-11-19T12:57:28+00:00",
+    "uid": "by.ely.authlib",
+    "version": "9.0.75"
+}
