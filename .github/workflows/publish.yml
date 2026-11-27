@@ -1,8 +1,8 @@
 ﻿name: publish meta
 
-# Carries the launcher metadata (meta/index.json and meta/v1/**) from here to
-# what serves it: the meta-v1.zip asset attached to the "meta" release, which
-# the mc.spiky.team build unpacks, and that build is then republished.
+# Carries the launcher metadata (index.json and v1/**) from here to what
+# serves it: the meta-v1.zip asset attached to the "meta" release, which the
+# mc.spiky.team build unpacks, and that build is then republished.
 on:
   workflow_dispatch:
   push:
@@ -23,14 +23,16 @@ jobs:
 
       - name: Reject a tree that could only break the site
         run: |
-          test -s meta/index.json
-          test -d meta/v1
+          if [ -d meta ] && [ -s meta/index.json ]; then root=meta; else root=.; fi
+          test -s "$root/index.json"
+          test -d "$root/v1"
 
       - name: Bundle
         run: |
           # -X drops extra attributes so the same tree always gives the same zip layout
+          if [ -d meta ]; then src=meta; else src=.; fi
           rm -f /tmp/meta-v1.zip
-          zip -qr -X /tmp/meta-v1.zip meta/index.json meta/v1
+          zip -qr -X /tmp/meta-v1.zip "$src/index.json" "$src/v1"
 
       - name: Attach meta-v1.zip to the meta release
         env:
